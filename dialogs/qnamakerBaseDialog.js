@@ -12,7 +12,7 @@ const { QnACardBuilder } = require('../utils/qnaCardBuilder');
 // Default parameters
 const DefaultThreshold = 0.3;
 const DefaultTopN = 3;
-const DefaultNoAnswer = 'No he logrado entenderte intenta nuevamente con otras palabras.';
+const DefaultNoAnswer = 'No he logrado entenderte intenta nuevamente con otras palabras 🗣🤳.';
 
 // Card parameters
 const DefaultCardTitle = 'Did you mean:';
