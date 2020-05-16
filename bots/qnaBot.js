@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { ActivityHandler } = require('botbuilder');
+const { ActionTypes, ActivityHandler, CardFactory, MessageFactory  } = require('botbuilder');
 
 /**
  * A simple bot that responds to utterances with answers from QnA Maker.
@@ -40,7 +40,9 @@ class QnABot extends ActivityHandler {
             const membersAdded = context.activity.membersAdded;
             for (let cnt = 0; cnt < membersAdded.length; cnt++) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
-                    await context.sendActivity('¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.');
+                    await this.sendIntroCard(context);
+
+                   // await context.sendActivity('¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.');
                 }
             }
 
@@ -56,6 +58,35 @@ class QnABot extends ActivityHandler {
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
+    }
+
+
+    async sendIntroCard(context) {
+        const card = CardFactory.heroCard(
+            '¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.',
+            'Selecciona una de las opciones: ',
+            ['https://aka.ms/bf-welcome-card-image'],
+            [
+                {
+                    type: ActionTypes.MessageBack,
+                    title: '¿Quieres ver soluciones de errores comunes?',
+                    text: 'iniciar'
+                },
+                {
+                    type: ActionTypes.MessageBack,
+                    title: '¿Quieres validar tu VPN?',
+                    text: 'validar'
+
+                },
+                {
+                    type: ActionTypes.MessageBack,
+                    title: 'Salir',
+                    text: 'Salir'
+                }
+            ]
+        );
+        console.log(card)
+        await context.sendActivity({ attachments: [card] });
     }
 }
 
