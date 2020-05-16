@@ -40,9 +40,9 @@ class QnABot extends ActivityHandler {
             const membersAdded = context.activity.membersAdded;
             for (let cnt = 0; cnt < membersAdded.length; cnt++) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
-                    await this.sendSuggestedActions(context);
-
-                   // await context.sendActivity('¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.');
+                    
+                   await context.sendActivity('¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.');
+                   await this.sendSuggestedActions(context);
                 }
             }
 
@@ -67,7 +67,7 @@ class QnABot extends ActivityHandler {
     
         const message = MessageFactory.list([
     
-            CardFactory.heroCard('¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.', ['imageUrl1'], ['Iniciar'])
+            CardFactory.heroCard('Si deseas iniciar🤳 dale clic en el siguiente boton:', ['imageUrl1'], ['Iniciar'])
         ]);
         await turnContext.sendActivity(message);
     
