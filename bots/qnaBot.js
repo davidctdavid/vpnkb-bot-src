@@ -40,7 +40,7 @@ class QnABot extends ActivityHandler {
             const membersAdded = context.activity.membersAdded;
             for (let cnt = 0; cnt < membersAdded.length; cnt++) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
-                    await this.sendIntroCard(context);
+                    await this.sendSuggestedActions(context);
 
                    // await context.sendActivity('¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.');
                 }
@@ -61,32 +61,17 @@ class QnABot extends ActivityHandler {
     }
 
 
-    async sendIntroCard(context) {
-        const card = CardFactory.heroCard(
-            '¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.',
-            'Selecciona una de las opciones: ',
-            ['https://aka.ms/bf-welcome-card-image'],
-            [
-                {
-                    type: ActionTypes.MessageBack,
-                    title: '¿Quieres ver soluciones de errores comunes?',
-                    text: 'iniciar'
-                },
-                {
-                    type: ActionTypes.MessageBack,
-                    title: '¿Quieres validar tu VPN?',
-                    text: 'validar'
-
-                },
-                {
-                    type: ActionTypes.MessageBack,
-                    title: 'Salir',
-                    text: 'Salir'
-                }
-            ]
-        );
-        console.log(card)
-        await context.sendActivity({ attachments: [card] });
+    async sendSuggestedActions(turnContext) {
+        /* var reply = MessageFactory.suggestedActions(['¿Quieres analizar el estado de tu VPN?', '¿Quieres ver soluciones de errores comunes?', 'Salir'], 'Selecciona una opción: ');
+         await turnContext.sendActivity(reply);*/
+    
+        const message = MessageFactory.list([
+    
+            CardFactory.heroCard('¡Bienvenido colaborador BP👨‍💻! Estoy capacitado para solucionar problemas que tengas con tu conexion VPN.', ['imageUrl1'], ['Iniciar'])
+        ]);
+        await turnContext.sendActivity(message);
+    
+    
     }
 }
 
