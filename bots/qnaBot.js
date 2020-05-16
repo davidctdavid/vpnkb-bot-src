@@ -27,7 +27,13 @@ class QnABot extends ActivityHandler {
 
         this.onMessage(async (context, next) => {
             console.log('Running dialog with Message Activity.');
+            console.log(context._activity.text)
+            if(context._activity.text=='2.- Analizar VPN'){
+                console.log('capturar nombre')
+                await this.sendIntroCard(context);
 
+                
+            }
             // Run the Dialog with the new message Activity.
             await this.dialog.run(context, this.dialogState);
 
@@ -58,6 +64,82 @@ class QnABot extends ActivityHandler {
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
+    }
+
+
+    async sendIntroCard(context) {
+        const card = CardFactory.adaptiveCard({
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+            {
+                "type": "ColumnSet",
+                "columns": [
+                    {
+                        "type": "Column",
+                        "width": 2,
+                        "items": [
+                            {
+                                "type": "TextBlock",
+                                "text": "Ingresa la informacion para Analizar tu VPN",
+                                "weight": "bolder",
+                                "size": "medium"
+                            },
+                            {
+                                "type": "TextBlock",
+                                "text": "Ingresa la informacion correcta.",
+                                "isSubtle": true,
+                                "wrap": true
+                            },
+                            {
+                                "type": "TextBlock",
+                                "text": "Nombre de usuario VPN",
+                                "wrap": true
+                            },
+                            {
+                                "type": "Input.Text",
+                                "id": "myName",
+                                "placeholder": "Last, First"
+                            },
+                            {
+                                "type": "TextBlock",
+                                "text": "Ingresa tu email",
+                                "wrap": true
+                            },
+                            {
+                                "type": "Input.Text",
+                                "id": "myEmail",
+                                "placeholder": "youremail@example.com",
+                                "style": "email"
+                            },
+                            {
+                                "type": "TextBlock",
+                                "text": "Ingresa el nombre de tu equipo"
+                            },
+                            {
+                                "type": "Input.Text",
+                                "id": "myTel",
+                                "placeholder": "UIOMIEQUIPO865",
+                                "style": "tel"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "actions": [
+            {
+                "type": "Action.Submit",
+                "title": "Submit"
+            }
+        ]
+    });
+    
+        const message = MessageFactory.attachment(card);
+    
+        await context.sendActivity(message);
+    
     }
 
 
