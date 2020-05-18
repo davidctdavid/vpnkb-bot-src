@@ -96,7 +96,7 @@ class QnABot extends ActivityHandler {
             }
             // Run the Dialog with the new message Activity.
          //   console.log('la variable apoyo es: ' + apoyo)
-            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == apoyo) {
+            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'Generar Ticket' || context._activity.text == apoyo) {
 
                // console.log('Entra a la opcion 1')
 
