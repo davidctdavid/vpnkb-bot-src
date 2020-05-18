@@ -42,8 +42,6 @@ class QnABot extends ActivityHandler {
             console.log('Running dialog with Message Activity.');
             //console.log(context._activity.text);
 
-            // console.log(contador)
-
             if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'Generar Ticket' || contador == 1 || contador == 2 || contador == 3) {
                 //console.log(context._activity.text)
                 if (contador == 0) {
@@ -97,10 +95,10 @@ class QnABot extends ActivityHandler {
 
             }
             // Run the Dialog with the new message Activity.
-            console.log('la variable apoyo es: ' + apoyo)
+         //   console.log('la variable apoyo es: ' + apoyo)
             if (context._activity.text == '2.- Analizar VPN' || context._activity.text == apoyo) {
 
-                console.log('Entra a la opcion 1')
+               // console.log('Entra a la opcion 1')
 
             } else {
                 apoyo = '';
@@ -132,7 +130,7 @@ class QnABot extends ActivityHandler {
             // Save any state changes. The load happened during the execution of the Dialog.
             await this.conversationState.saveChanges(context, false);
             await this.userState.saveChanges(context, false);
-            console.log('entro en dialogo')
+          //  console.log('entro en dialogo')
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });

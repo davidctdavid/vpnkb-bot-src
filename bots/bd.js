@@ -7,7 +7,11 @@ var config = {
     user: 'djrevelo@sql-databases-bp',
     password: 'BPichincha2020',
     server: 'sql-databases-bp.database.windows.net',
-    database: 'RPA_VPN'
+    database: 'RPA_VPN', 
+    options: {
+        enableArithAbort: true
+
+    }
 };
 
 // connect to your database
