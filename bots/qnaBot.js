@@ -45,13 +45,13 @@ class QnABot extends ActivityHandler {
             if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'Generar Ticket' || contador == 1 || contador == 2 || contador == 3) {
                 //console.log(context._activity.text)
                 if (contador == 0) {
-                    await context.sendActivity('Ingresa nombre de usuario: ');
+                    await context.sendActivity('Ingresa el nombre de usuario de red ejemplo (acastro): ');
 
                 }
 
                 if (contador == 1) {
                     usuariovpn = context._activity.text;
-                    await context.sendActivity('Ingresa el nombre de tu equipo: ');
+                    await context.sendActivity('Ingresa el nombre de tu equipo ejemplo (UIOEQUIPO67): ');
                     console.log('Tu nombre de usuario es: ' + usuariovpn)
                     //context._activity.text === '2.- Analizar VPN';
 
@@ -63,7 +63,7 @@ class QnABot extends ActivityHandler {
                     namepc = context._activity.text;
                     console.log('El nombre de tu equipo: ' + namepc)
 
-                    await context.sendActivity('Ingresa la ip de tu equipo: ');
+                    await context.sendActivity('Ingresa la ip de tu equipo ejemplo (200.23.29.12): ');
                     apoyo = context._activity.text
                 }
                 if (contador == 3) {
