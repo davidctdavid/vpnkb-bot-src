@@ -12,6 +12,7 @@ let namepc = 'UIOOAS76DF';
 let ipuser = '';
 let contador = 0;
 let apoyo = '';
+let apoyouno = '';
 
 
 /**
@@ -64,19 +65,22 @@ class QnABot extends ActivityHandler {
                     console.log('El nombre de tu equipo: ' + namepc)
 
                     await context.sendActivity('Ingresa la ip de tu equipo ejemplo (200.23.29.12): ');
-                    apoyo = context._activity.text
+                    apoyo = context._activity.text;
+                    apoyouno = context._activity.text;
                 }
                 if (contador == 3) {
                     ipuser = context._activity.text;
                     console.log('Tu IP es: ' + ipuser)
 
-                    await context.sendActivity('Gracias, se realizara el analisis de tu VPN');
                     await this.sendActions(context, usuariovpn, namepc, ipuser);
+                    await context.sendActivity('Gracias, se realizara el analisis de tu VPN');
 
                     await BDatos.InsertarBD(usuariovpn, namepc, ipuser);
                     //apoyo = context._activity.text
 
                     apoyo == '';
+                    contador = 0;
+
                 }
                 contador++
 
@@ -91,7 +95,7 @@ class QnABot extends ActivityHandler {
             } else {
                 apoyo = '';
                 contador = 0;
-
+                console.log(context)
                 await this.dialog.run(context, this.dialogState);
                 await next();
 
