@@ -8,9 +8,9 @@ var config = {
     password: 'BPichincha2020',
     server: 'sql-databases-bp.database.windows.net',
     database: 'RPA_VPN', 
+
     options: {
         enableArithAbort: true
-
     }
 };
 

@@ -42,7 +42,7 @@ class QnABot extends ActivityHandler {
             console.log('Running dialog with Message Activity.');
             //console.log(context._activity.text);
 
-            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'Generar Ticket' || contador == 1 || contador == 2 || contador == 3) {
+            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'analizar' || context._activity.text == 'Analizar' || context._activity.text == 'Generar Ticket' || contador == 1 || contador == 2 || contador == 3) {
                 //console.log(context._activity.text)
                 if (contador == 0) {
                     await context.sendActivity('Ingresa el nombre de usuario de red ejemplo (acastro): ');
@@ -71,34 +71,22 @@ class QnABot extends ActivityHandler {
                     console.log('Tu IP es: ' + ipuser)
 
                     await context.sendActivity('Gracias, se realizara el analisis de tu VPN');
-                    await BDatos.InsertarBD(usuariovpn,namepc,ipuser);
+                    await this.sendActions(context, usuariovpn, namepc, ipuser);
+
+                    await BDatos.InsertarBD(usuariovpn, namepc, ipuser);
                     //apoyo = context._activity.text
 
                     apoyo == '';
                 }
                 contador++
 
-                /*
-                if (contador == 3){
-
-                    await context.sendActivity('Ingresa la ip de tu equipo: ');
-                    apoyo=='';
-
-                }
-                // await this.InsertarBD();
-                //await this.LlenarDatos(context);
-                contador++
-                if (contador==4){
-                    contador == 0;
-                }*/
-
-
+    
             }
             // Run the Dialog with the new message Activity.
-         //   console.log('la variable apoyo es: ' + apoyo)
-            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'Generar Ticket' || context._activity.text == apoyo) {
+            //   console.log('la variable apoyo es: ' + apoyo)
+            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'analizar' || context._activity.text == 'Analizar' || context._activity.text == 'Generar Ticket' || context._activity.text == apoyo) {
 
-               // console.log('Entra a la opcion 1')
+                // console.log('Entra a la opcion 1')
 
             } else {
                 apoyo = '';
@@ -130,7 +118,7 @@ class QnABot extends ActivityHandler {
             // Save any state changes. The load happened during the execution of the Dialog.
             await this.conversationState.saveChanges(context, false);
             await this.userState.saveChanges(context, false);
-          //  console.log('entro en dialogo')
+            //  console.log('entro en dialogo')
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
@@ -215,16 +203,17 @@ class QnABot extends ActivityHandler {
 
 
     async sendSuggestedActions(turnContext) {
-        /* var reply = MessageFactory.suggestedActions(['¿Quieres analizar el estado de tu VPN?', '¿Quieres ver soluciones de errores comunes?', 'Salir'], 'Selecciona una opción: ');
-         await turnContext.sendActivity(reply);*/
-
         const message = MessageFactory.list([
-
             CardFactory.heroCard('Si deseas iniciar🤳 dale clic en el siguiente boton:', ['imageUrl1'], ['Iniciar'])
         ]);
         await turnContext.sendActivity(message);
+    }
 
-
+    async sendActions(turnContext, nombre, equipo, ip) {
+        const message = MessageFactory.list([
+            CardFactory.heroCard(`Los datos ingresados para validar tu VPN son:\n\n Usuario de red: ${nombre}\n\n Nombre de equipo: ${equipo}\n\n IP de equipo: ${ip}  `, ['imageUrl1'], ['Finalizar']) 
+        ]);
+        await turnContext.sendActivity(message);
     }
 
     async InsertarBD435345() {
