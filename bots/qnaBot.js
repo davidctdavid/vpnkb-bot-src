@@ -43,7 +43,7 @@ class QnABot extends ActivityHandler {
             console.log('Running dialog with Message Activity.');
             //console.log(context._activity.text);
 
-            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'analizar' || context._activity.text == 'Analizar' || context._activity.text == 'Generar Ticket' || contador == 1 || contador == 2 || contador == 3) {
+            if (context._activity.text == 'Analizar VPN' || context._activity.text == 'analizar' || context._activity.text == 'Analizar' || context._activity.text == 'Generar Ticket' || contador == 1 || contador == 2 || contador == 3) {
                 //console.log(context._activity.text)
                 if (contador == 0) {
                     await context.sendActivity('Ingresa el nombre de usuario de red ejemplo (acastro): ');
@@ -72,7 +72,9 @@ class QnABot extends ActivityHandler {
                     ipuser = context._activity.text;
                     console.log('Tu IP es: ' + ipuser)
 
-                    await this.sendActions(context, usuariovpn, namepc, ipuser);
+                    //await this.sendActions(context, usuariovpn, namepc, ipuser);
+                    await context.sendActivity(`El usuario de red ingresado es: ${usuariovpn}\n\n El nombre de equipo es: ${namepc}\n\n La IP de tu equipo es: ${ipuser}`);
+
                     await context.sendActivity('Gracias, se realizara el analisis de tu VPN');
 
                     await BDatos.InsertarBD(usuariovpn, namepc, ipuser);
@@ -88,7 +90,7 @@ class QnABot extends ActivityHandler {
             }
             // Run the Dialog with the new message Activity.
             //   console.log('la variable apoyo es: ' + apoyo)
-            if (context._activity.text == '2.- Analizar VPN' || context._activity.text == 'analizar' || context._activity.text == 'Analizar' || context._activity.text == 'Generar Ticket' || context._activity.text == apoyo) {
+            if (context._activity.text == 'Analizar VPN' || context._activity.text == 'analizar' || context._activity.text == 'Analizar' || context._activity.text == 'Generar Ticket' || context._activity.text == apoyo) {
 
                 // console.log('Entra a la opcion 1')
 
