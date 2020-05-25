@@ -44,7 +44,7 @@ class QnABot extends ActivityHandler {
             //console.log(context._activity.text);
 
             if (context._activity.text == 'Analizar VPN' || context._activity.text == 'analizar' || context._activity.text == 'Analizar' || context._activity.text == 'Generar Ticket' || contador == 1 || contador == 2 || contador == 3) {
-                //console.log(context._activity.text)
+                console.log(context._activity.text)
                 if (contador == 0) {
                     await context.sendActivity('Ingresa el nombre de usuario de red ejemplo (acastro): ');
 
